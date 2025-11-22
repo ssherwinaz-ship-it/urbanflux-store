@@ -477,6 +477,99 @@
             font-size: 13px;
         }
 
+        /* About Section */
+        .about-section {
+            padding: var(--space-3xl) var(--space-lg);
+            background: var(--color-black);
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-3xl);
+        }
+
+        .about-card {
+            background: var(--color-dark-gray);
+            padding: var(--space-xl);
+            border-radius: 8px;
+            border: 2px solid transparent;
+            transition: all var(--transition-normal);
+        }
+
+        .about-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(255, 51, 102, 0.15);
+        }
+
+        .about-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-md);
+        }
+
+        .about-card h3 {
+            font-size: 22px;
+            margin-bottom: var(--space-md);
+            color: var(--color-white);
+            font-weight: 600;
+        }
+
+        .about-card p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--color-light-gray);
+        }
+
+        .manifesto {
+            background: linear-gradient(135deg, var(--color-dark-gray), var(--color-mid-gray));
+            padding: var(--space-2xl);
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid var(--color-primary);
+        }
+
+        .manifesto-title {
+            font-family: var(--font-display);
+            font-size: 32px;
+            margin-bottom: var(--space-xl);
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .manifesto-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .manifesto-points p {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--color-white);
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .manifesto-points {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Mobile Menu */
         .mobile-menu-btn {
             display: none;
@@ -590,6 +683,64 @@
                 be boldly different. Welcome to the flux.
             </p>
             <button class="cta-btn">Join The Movement</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <h2 class="section-title">WE ARE THE UNDERDOGS</h2>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">🎨</div>
+                    <h3>Designed by Creators, For Creators</h3>
+                    <p>We're not some corporate giant. We're artists, designers, and dreamers who got tired of boring clothes. Started in a college dorm, funded by ramen money and student loans. Now we're here to shake things up.</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">♻️</div>
+                    <h3>Sustainability Matters</h3>
+                    <p>Yeah, we care about the planet. Eco-friendly materials, ethical production, minimal waste. Looking good shouldn't cost the Earth (literally). Every purchase plants a tree. We're trying here.</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">💯</div>
+                    <h3>Real Talk, No BS</h3>
+                    <p>We don't do fake marketing or inflated prices. What you see is what you get—quality streetwear at honest prices. We'd rather build a community than make a quick buck. Student discounts? We got you.</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">🌍</div>
+                    <h3>Built for the Culture</h3>
+                    <p>Music festivals, late-night skate sessions, coffee shop hangs, or just vibing with friends. Our clothes are made for real life, not just Instagram. Wear it to class, wear it to the club—it works everywhere.</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">🤝</div>
+                    <h3>You're Part of This</h3>
+                    <p>Every design, every drop—we listen to YOU. Drop suggestions in our DMs. Vote on new designs. This isn't just our brand, it's ours. You wear it, you shape it. Let's build something legendary together.</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="about-icon">🚀</div>
+                    <h3>The Future is Bold</h3>
+                    <p>Started with hoodies, now we're dreaming bigger. Pop-up shops, collabs with underground artists, maybe even a festival someday. We're just getting started, and you're along for the ride. Buckle up.</p>
+                </div>
+            </div>
+            
+            <div class="manifesto">
+                <h3 class="manifesto-title">THE URBAN FLUX MANIFESTO</h3>
+                <div class="manifesto-points">
+                    <p>✨ Express yourself fearlessly</p>
+                    <p>🔥 Quality over everything</p>
+                    <p>🌱 Respect the planet</p>
+                    <p>💪 Support each other</p>
+                    <p>🎯 Stay authentic always</p>
+                    <p>⚡ Keep pushing boundaries</p>
+                </div>
+                <button class="cta-btn" style="margin-top: 32px;">Join Our Community</button>
+            </div>
         </div>
     </section>
 
