@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Flux - Street Culture Redefined</title>
+    <style>
+        :root {
+            /* Brand Colors - Bold & Edgy */
+            --color-black: #0A0A0A;
+            --color-white: #FFFFFF;
+            --color-primary: #FF3366; /* Electric Pink */
+            --color-secondary: #00F0FF; /* Cyber Blue */
+            --color-accent: #FFD700; /* Gold */
+            --color-dark-gray: #1A1A1A;
+            --color-mid-gray: #2A2A2A;
+            --color-light-gray: #CCCCCC;
+            --color-text-muted: #999999;
+            
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+            
+            /* Typography */
+            --font-display: 'Arial Black', sans-serif;
+            --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            
+            /* Animation */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-black);
+            color: var(--color-white);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--color-primary);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 24px;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--space-xl);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-primary);
+            transition: width var(--transition-normal);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cart-btn {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border: none;
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform var(--transition-fast);
+            position: relative;
+        }
+
+        .cart-btn:hover {
+            transform: scale(1.05);
+            background: var(--color-secondary);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--color-accent);
+            color: var(--color-black);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            height: 600px;
+            background: linear-gradient(135deg, var(--color-dark-gray), var(--color-mid-gray));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: 'URBAN FLUX';
+            position: absolute;
+            font-size: 200px;
+            font-family: var(--font-display);
+            color: rgba(255, 51, 102, 0.05);
+            letter-spacing: 20px;
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: var(--space-xl);
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: 72px;
+            letter-spacing: 4px;
+            margin-bottom: var(--space-md);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--color-light-gray);
+            letter-spacing: 3px;
+            margin-bottom: var(--space-2xl);
+            text-transform: uppercase;
+        }
+
+        .cta-btn {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border: none;
+            padding: var(--space-md) var(--space-2xl);
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            border: 2px solid transparent;
+        }
+
+        .cta-btn:hover {
+            background: transparent;
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 51, 102, 0.3);
+        }
+
+        /* Category Filter */
+        .filter-section {
+            padding: var(--space-2xl) var(--space-lg);
+            background: var(--color-dark-gray);
+            border-bottom: 1px solid var(--color-mid-gray);
+        }
+
+        .filter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: var(--color-white);
+            border: 2px solid var(--color-mid-gray);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 13px;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--color-primary);
+            background: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Products Grid */
+        .products-section {
+            padding: var(--space-3xl) var(--space-lg);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+            letter-spacing: 3px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .product-card {
+            background: var(--color-dark-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform var(--transition-normal);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-primary);
+            box-shadow: 0 20px 40px rgba(255, 51, 102, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(135deg, var(--color-mid-gray), var(--color-dark-gray));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: var(--space-md);
+            right: var(--space-md);
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-info {
+            padding: var(--space-lg);
+        }
+
+        .product-category {
+            color: var(--color-secondary);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .product-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--color-white);
+        }
+
+        .product-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .add-to-cart {
+            flex: 1;
+            background: var(--color-primary);
+            color: var(--color-white);
+            border: none;
+            padding: var(--space-md);
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background var(--transition-fast);
+        }
+
+        .add-to-cart:hover {
+            background: var(--color-secondary);
+        }
+
+        .quick-view {
+            background: transparent;
+            color: var(--color-white);
+            border: 2px solid var(--color-mid-gray);
+            padding: var(--space-md);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .quick-view:hover {
+            border-color: var(--color-white);
+        }
+
+        /* Brand Story */
+        .story-section {
+            background: var(--color-dark-gray);
+            padding: var(--space-3xl) var(--space-lg);
+            text-align: center;
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-title {
+            font-family: var(--font-display);
+            font-size: 42px;
+            margin-bottom: var(--space-lg);
+            letter-spacing: 2px;
+        }
+
+        .story-text {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--color-light-gray);
+            margin-bottom: var(--space-xl);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-black);
+            padding: var(--space-2xl) var(--space-lg);
+            border-top: 2px solid var(--color-primary);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-2xl);
+        }
+
+        .footer-section h3 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            margin-bottom: var(--space-md);
+            color: var(--color-primary);
+            letter-spacing: 2px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--color-light-gray);
+            font-size: 14px;
+            line-height: 1.8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer-section a:hover {
+            color: var(--color-primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-md);
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--color-mid-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            transition: all var(--transition-fast);
+        }
+
+        .social-icon:hover {
+            background: var(--color-primary);
+            transform: translateY(-4px);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: var(--space-2xl);
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--color-mid-gray);
+            color: var(--color-text-muted);
+            font-size: 13px;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--color-white);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 42px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: var(--space-lg);
+            right: var(--space-lg);
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: 4px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all var(--transition-normal);
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">URBAN FLUX</div>
+            <ul class="nav-links">
+                <li><a href="#new">New Arrivals</a></li>
+                <li><a href="#men">Men</a></li>
+                <li><a href="#women">Women</a></li>
+                <li><a href="#collections">Collections</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+            <button class="cart-btn" onclick="viewCart()">
+                🛒 Cart
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">URBAN FLUX</h1>
+            <p class="hero-subtitle">Street Culture Redefined</p>
+            <button class="cta-btn" onclick="scrollToProducts()">Shop Now</button>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <button class="filter-btn active" data-category="all" onclick="filterProducts('all')">All</button>
+            <button class="filter-btn" data-category="hoodies" onclick="filterProducts('hoodies')">Hoodies</button>
+            <button class="filter-btn" data-category="tees" onclick="filterProducts('tees')">T-Shirts</button>
+            <button class="filter-btn" data-category="jackets" onclick="filterProducts('jackets')">Jackets</button>
+            <button class="filter-btn" data-category="pants" onclick="filterProducts('pants')">Pants</button>
+            <button class="filter-btn" data-category="accessories" onclick="filterProducts('accessories')">Accessories</button>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <h2 class="section-title">LATEST DROPS</h2>
+        <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- Brand Story -->
+    <section class="story-section">
+        <div class="story-content">
+            <h2 class="story-title">THE URBAN FLUX STORY</h2>
+            <p class="story-text">
+                Born in the streets, refined in the studio. Urban Flux represents the intersection of street culture, 
+                modern design, and fearless self-expression. We don't follow trends—we create them. Every piece is 
+                crafted for those who dare to stand out, who embrace the chaos, and who redefine what it means to 
+                be boldly different. Welcome to the flux.
+            </p>
+            <button class="cta-btn">Join The Movement</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>URBAN FLUX</h3>
+                <p>Street culture redefined. Premium streetwear for the bold and fearless.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon">📷</a>
+                    <a href="#" class="social-icon">🐦</a>
+                    <a href="#" class="social-icon">📘</a>
+                    <a href="#" class="social-icon">🎵</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>SHOP</h3>
+                <a href="#">New Arrivals</a>
+                <a href="#">Men's Collection</a>
+                <a href="#">Women's Collection</a>
+                <a href="#">Limited Editions</a>
+                <a href="#">Sale</a>
+            </div>
+            <div class="footer-section">
+                <h3>SUPPORT</h3>
+                <a href="#">Shipping Info</a>
+                <a href="#">Returns &amp; Exchanges</a>
+                <a href="#">Size Guide</a>
+                <a href="#">Contact Us</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="footer-section">
+                <h3>NEWSLETTER</h3>
+                <p>Stay in the loop with exclusive drops, style tips, and early access to new collections.</p>
+                <input type="email" placeholder="Enter your email" style="width: 100%; padding: 12px; margin-top: 12px; background: var(--color-mid-gray); border: 1px solid var(--color-mid-gray); color: white; border-radius: 4px;">
+                <button class="cta-btn" style="width: 100%; margin-top: 12px;">Subscribe</button>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Urban Flux. All rights reserved. | Street Culture Redefined.
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Product Data
+        const products = [
+            {
+                id: 1,
+                name: "Cyber Storm Hoodie",
+                category: "hoodies",
+                price: 89.99,
+                badge: "NEW",
+                icon: "🔥"
+            },
+            {
+                id: 2,
+                name: "Neon Wave Tee",
+                category: "tees",
+                price: 45.99,
+                badge: "TRENDING",
+                icon: "⚡"
+            },
+            {
+                id: 3,
+                name: "Shadow Tech Jacket",
+                category: "jackets",
+                price: 149.99,
+                badge: "LIMITED",
+                icon: "🌙"
+            },
+            {
+                id: 4,
+                name: "Electric Cargo Pants",
+                category: "pants",
+                price: 79.99,
+                badge: "",
+                icon: "💥"
+            },
+            {
+                id: 5,
+                name: "Flux Cap",
+                category: "accessories",
+                price: 35.99,
+                badge: "NEW",
+                icon: "🧢"
+            },
+            {
+                id: 6,
+                name: "Midnight Oversized Tee",
+                category: "tees",
+                price: 49.99,
+                badge: "",
+                icon: "🌃"
+            },
+            {
+                id: 7,
+                name: "Graffiti Bomber Jacket",
+                category: "jackets",
+                price: 179.99,
+                badge: "LIMITED",
+                icon: "🎨"
+            },
+            {
+                id: 8,
+                name: "Pulse Zip Hoodie",
+                category: "hoodies",
+                price: 94.99,
+                badge: "TRENDING",
+                icon: "💫"
+            },
+            {
+                id: 9,
+                name: "Street Runner Pants",
+                category: "pants",
+                price: 69.99,
+                badge: "",
+                icon: "🏃"
+            },
+            {
+                id: 10,
+                name: "Glitch Backpack",
+                category: "accessories",
+                price: 59.99,
+                badge: "NEW",
+                icon: "🎒"
+            },
+            {
+                id: 11,
+                name: "Retro Vibe Hoodie",
+                category: "hoodies",
+                price: 84.99,
+                badge: "",
+                icon: "📼"
+            },
+            {
+                id: 12,
+                name: "Neon Nights Tee",
+                category: "tees",
+                price: 42.99,
+                badge: "TRENDING",
+                icon: "🌆"
+            }
+        ];
+
+        let cart = [];
+        let currentFilter = 'all';
+
+        // Render Products
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const filteredProducts = currentFilter === 'all' 
+                ? products 
+                : products.filter(p => p.category === currentFilter);
+
+            grid.innerHTML = filteredProducts.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        <span style="font-size: 100px;">${product.icon}</span>
+                        ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.category}</div>
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-price">$${product.price}</div>
+                        <div class="product-actions">
+                            <button class="add-to-cart" onclick="addToCart(${product.id})">Add to Cart</button>
+                            <button class="quick-view" onclick="quickView(${product.id})">👁</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter Products
+        function filterProducts(category) {
+            currentFilter = category;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.category === category) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            renderProducts();
+        }
+
+        // Add to Cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            cart.push(product);
+            updateCartCount();
+            showToast(`${product.name} added to cart! 🔥`);
+        }
+
+        // Update Cart Count
+        function updateCartCount() {
+            document.getElementById('cartCount').textContent = cart.length;
+        }
+
+        // Show Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Quick View
+        function quickView(productId) {
+            const product = products.find(p => p.id === productId);
+            alert(`${product.icon} ${product.name}\n\nPrice: $${product.price}\nCategory: ${product.category.toUpperCase()}\n\nQuick View feature - In production, this would open a detailed modal with size selection, images, and more info!`);
+        }
+
+        // View Cart
+        function viewCart() {
+            if (cart.length === 0) {
+                alert('Your cart is empty! 🛒\n\nStart shopping to add items to your cart.');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const cartItems = cart.map(item => `${item.icon} ${item.name} - $${item.price}`).join('\n');
+            
+            alert(`🛒 YOUR CART\n\n${cartItems}\n\n━━━━━━━━━━━━━━━\nTOTAL: $${total.toFixed(2)}\n\nIn production, this would open a detailed cart page with checkout options!`);
+        }
+
+        // Scroll to Products
+        function scrollToProducts() {
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize
+        renderProducts();
+    </script>
+</body>
+</html>
+
