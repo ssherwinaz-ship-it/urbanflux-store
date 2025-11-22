@@ -538,10 +538,10 @@
         <div class="nav-container">
             <div class="logo">URBAN FLUX</div>
             <ul class="nav-links">
-                <li><a href="#new">New Arrivals</a></li>
-                <li><a href="#men">Men</a></li>
-                <li><a href="#women">Women</a></li>
-                <li><a href="#collections">Collections</a></li>
+                <li><a href="#products" onclick="filterByGender('new')">New Arrivals</a></li>
+                <li><a href="#products" onclick="filterByGender('men')">Men</a></li>
+                <li><a href="#products" onclick="filterByGender('women')">Women</a></li>
+                <li><a href="#products" onclick="filterByGender('collections')">Collections</a></li>
                 <li><a href="#about">About</a></li>
             </ul>
             <button class="mobile-menu-btn">☰</button>
@@ -644,6 +644,7 @@
                 id: 1,
                 name: "Cyber Storm Hoodie",
                 category: "hoodies",
+                gender: "men",
                 price: 89.99,
                 badge: "NEW",
                 icon: "🔥"
@@ -652,6 +653,7 @@
                 id: 2,
                 name: "Neon Wave Tee",
                 category: "tees",
+                gender: "women",
                 price: 45.99,
                 badge: "TRENDING",
                 icon: "⚡"
@@ -660,6 +662,7 @@
                 id: 3,
                 name: "Shadow Tech Jacket",
                 category: "jackets",
+                gender: "men",
                 price: 149.99,
                 badge: "LIMITED",
                 icon: "🌙"
@@ -668,6 +671,7 @@
                 id: 4,
                 name: "Electric Cargo Pants",
                 category: "pants",
+                gender: "unisex",
                 price: 79.99,
                 badge: "",
                 icon: "💥"
@@ -676,6 +680,7 @@
                 id: 5,
                 name: "Flux Cap",
                 category: "accessories",
+                gender: "unisex",
                 price: 35.99,
                 badge: "NEW",
                 icon: "🧢"
@@ -684,6 +689,7 @@
                 id: 6,
                 name: "Midnight Oversized Tee",
                 category: "tees",
+                gender: "women",
                 price: 49.99,
                 badge: "",
                 icon: "🌃"
@@ -692,6 +698,7 @@
                 id: 7,
                 name: "Graffiti Bomber Jacket",
                 category: "jackets",
+                gender: "men",
                 price: 179.99,
                 badge: "LIMITED",
                 icon: "🎨"
@@ -700,6 +707,7 @@
                 id: 8,
                 name: "Pulse Zip Hoodie",
                 category: "hoodies",
+                gender: "women",
                 price: 94.99,
                 badge: "TRENDING",
                 icon: "💫"
@@ -708,6 +716,7 @@
                 id: 9,
                 name: "Street Runner Pants",
                 category: "pants",
+                gender: "men",
                 price: 69.99,
                 badge: "",
                 icon: "🏃"
@@ -716,6 +725,7 @@
                 id: 10,
                 name: "Glitch Backpack",
                 category: "accessories",
+                gender: "unisex",
                 price: 59.99,
                 badge: "NEW",
                 icon: "🎒"
@@ -724,6 +734,7 @@
                 id: 11,
                 name: "Retro Vibe Hoodie",
                 category: "hoodies",
+                gender: "men",
                 price: 84.99,
                 badge: "",
                 icon: "📼"
@@ -732,21 +743,64 @@
                 id: 12,
                 name: "Neon Nights Tee",
                 category: "tees",
+                gender: "women",
                 price: 42.99,
                 badge: "TRENDING",
                 icon: "🌆"
+            },
+            {
+                id: 13,
+                name: "Urban Queen Jacket",
+                category: "jackets",
+                gender: "women",
+                price: 159.99,
+                badge: "NEW",
+                icon: "👑"
+            },
+            {
+                id: 14,
+                name: "Tech Flex Hoodie",
+                category: "hoodies",
+                gender: "men",
+                price: 92.99,
+                badge: "",
+                icon: "🤖"
+            },
+            {
+                id: 15,
+                name: "Vibe Check Tee",
+                category: "tees",
+                gender: "men",
+                price: 39.99,
+                badge: "TRENDING",
+                icon: "✨"
             }
         ];
 
         let cart = [];
         let currentFilter = 'all';
+        let currentGender = 'all';
 
         // Render Products
         function renderProducts() {
             const grid = document.getElementById('productsGrid');
-            const filteredProducts = currentFilter === 'all' 
-                ? products 
-                : products.filter(p => p.category === currentFilter);
+            let filteredProducts = products;
+            
+            // Apply gender filter
+            if (currentGender === 'men') {
+                filteredProducts = filteredProducts.filter(p => p.gender === 'men' || p.gender === 'unisex');
+            } else if (currentGender === 'women') {
+                filteredProducts = filteredProducts.filter(p => p.gender === 'women' || p.gender === 'unisex');
+            } else if (currentGender === 'new') {
+                filteredProducts = filteredProducts.filter(p => p.badge === 'NEW');
+            } else if (currentGender === 'collections') {
+                filteredProducts = filteredProducts.filter(p => p.badge === 'LIMITED');
+            }
+            
+            // Apply category filter
+            if (currentFilter !== 'all') {
+                filteredProducts = filteredProducts.filter(p => p.category === currentFilter);
+            }
 
             grid.innerHTML = filteredProducts.map(product => `
                 <div class="product-card">
@@ -767,6 +821,17 @@
             `).join('');
         }
 
+        // Filter by Gender
+        function filterByGender(gender) {
+            currentGender = gender;
+            renderProducts();
+            
+            // Smooth scroll to products
+            setTimeout(() => {
+                document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
         // Filter Products
         function filterProducts(category) {
             currentFilter = category;
@@ -780,6 +845,11 @@
             });
             
             renderProducts();
+            
+            // Smooth scroll to products
+            setTimeout(() => {
+                document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
         }
 
         // Add to Cart
